@@ -59,7 +59,7 @@
     
     navTabBarController.navTabBar_style = YPNavTabBarStyleCenter;
     
-    navTabBarController.navTabBar_normalTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:16];
+    navTabBarController.navTabBar_normalTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:40];
 }
 
 @end

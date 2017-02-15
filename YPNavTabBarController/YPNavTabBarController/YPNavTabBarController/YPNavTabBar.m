@@ -129,7 +129,11 @@
         {
             CGSize size = CGSizeMake(MAXFLOAT, MAXFLOAT);
             NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-            attributes[NSFontAttributeName] = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+            UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+            if(self.navTabBar_normalTitle_font) {
+                font = self.navTabBar_normalTitle_font;
+            }
+            attributes[NSFontAttributeName] = font;
             
             size = [title boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
             
@@ -148,6 +152,10 @@
 - (CGFloat)contentWidthAndAddNavTabBarItemsWithButtonsWidth:(NSArray *)widths
 {
     CGFloat buttonX = 0;
+    for (UIButton *btn in self.items) {
+        [btn removeFromSuperview];
+    }
+    [self.items removeAllObjects];
     for (NSInteger index = 0; index < self.itemTitles.count; index++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -156,6 +164,13 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(itemPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+        if(self.navTabBar_normalTitle_font) {
+            font = self.navTabBar_normalTitle_font;
+        }
+        button.titleLabel.font = font;
+        
         [_navgationTabBar addSubview:button];
         
         [self.items addObject:button];
@@ -314,6 +329,8 @@
     for (UIButton *btn in self.items) {
         btn.titleLabel.font = navTabBar_normalTitle_font;
     }
+    
+    [self updateData];
 }
 
 - (void)setType:(YPNavTabBarType)type
