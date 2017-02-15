@@ -38,9 +38,9 @@
     
     navTabBarController.presetSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     navTabBarController.contentViewH = 44; // 默认44
-    navTabBarController.navTabBar_Y = 20 + self.navigationController.toolbar.frame.size.height; // 默认为0
+    navTabBarController.navTabBar_Y = self.navigationController.toolbar.frame.size.height; // 默认为0
     
-    navTabBarController.currentIndex = 2;
+    navTabBarController.currentIndex = 1;
     
 
     navTabBarController.navTabBar_type = YPNavTabBarTypeLine;

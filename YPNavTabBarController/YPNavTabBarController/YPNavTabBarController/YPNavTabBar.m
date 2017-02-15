@@ -25,7 +25,6 @@
 
 
 
-
 @end
 
 @implementation YPNavTabBar
@@ -181,8 +180,7 @@
     [self showLineWithButtonWidth:[widths[0] floatValue]];
     
     [self showEllipseWithButtonWidth:[widths[0] floatValue]];
-    
-    
+
     return buttonX;
 }
 
@@ -199,16 +197,28 @@
 
 - (void)showLineWithButtonWidth:(CGFloat)width
 {
+    CGFloat lineX = 0;
+    if(self.currentItemIndex && self.currentItemIndex < self.items.count) {
+        UIButton *btn = self.items[self.currentItemIndex];
+        lineX = btn.frame.origin.x;
+        
+    }
     if(self.lineWidth) {
         
     } else {
-        self.line.frame = CGRectMake(2.0f, self.contentViewH - 3.0f, width - 4.0f, 3.0f);
+        self.line.frame = CGRectMake(lineX + 2.0f, self.contentViewH - 3.0f, width - 4.0f, 3.0f);
     }
 }
 
 - (void)showEllipseWithButtonWidth:(CGFloat)width
 {
-    self.ellipse.frame = CGRectMake(2.0f, 8.0f, width - 4.0f, self.contentViewH - 16.0f);
+    CGFloat lineX = 0;
+    if(self.currentItemIndex && self.currentItemIndex < self.items.count) {
+        UIButton *btn = self.items[self.currentItemIndex];
+        lineX = btn.frame.origin.x;
+        
+    }
+    self.ellipse.frame = CGRectMake(lineX + 2.0f, 8.0f, width - 4.0f, self.contentViewH - 16.0f);
 }
 
 
@@ -230,6 +240,8 @@
     
     CGFloat flag = YPScreenW;
     
+    NSLog(@"%f, %f, %f", button.frame.origin.x, button.frame.size.width , flag);
+    NSLog(@"%f, %f, %d", button.frame.origin.x + button.frame.size.width, flag, button.frame.origin.x + button.frame.size.width > flag);
     if (button.frame.origin.x + button.frame.size.width > flag)
     {
         CGFloat offsetX = button.frame.origin.x + button.frame.size.width - flag;
