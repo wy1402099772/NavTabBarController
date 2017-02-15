@@ -30,6 +30,7 @@
 
 @implementation YPNavTabBar
 
+@synthesize contentViewH = _contentViewH;
 
 #pragma mark - lazy -
 
@@ -92,7 +93,7 @@
 
 - (void)prepare
 {
-    self.navgationTabBar.frame = CGRectMake(0, 0, YPScreenW, YPNavigationBarH);
+    self.navgationTabBar.frame = CGRectMake(0, 0, YPScreenW, self.contentViewH);
 }
 
 #pragma mark - 公共方法 -
@@ -150,7 +151,7 @@
     for (NSInteger index = 0; index < self.itemTitles.count; index++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(buttonX, 0, [widths[index] floatValue], YPNavigationBarH);
+        button.frame = CGRectMake(buttonX, 0, [widths[index] floatValue], self.contentViewH);
         [button setTitle:_itemTitles[index] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
@@ -183,12 +184,16 @@
 
 - (void)showLineWithButtonWidth:(CGFloat)width
 {
-    self.line.frame = CGRectMake(2.0f, YPNavigationBarH - 3.0f, width - 4.0f, 3.0f);
+    if(self.lineWidth) {
+        
+    } else {
+        self.line.frame = CGRectMake(2.0f, self.contentViewH - 3.0f, width - 4.0f, 3.0f);
+    }
 }
 
 - (void)showEllipseWithButtonWidth:(CGFloat)width
 {
-    self.ellipse.frame = CGRectMake(2.0f, 8.0f, width - 4.0f, YPNavigationBarH - 16.0f);
+    self.ellipse.frame = CGRectMake(2.0f, 8.0f, width - 4.0f, self.contentViewH - 16.0f);
 }
 
 
@@ -245,15 +250,27 @@
         
         
         CGFloat lineY = _line.frame.origin.y;
-        CGFloat lineW = [_itemsWidth[_currentItemIndex] floatValue] - 4.0f;
+        CGFloat lineW = (self.lineWidth) ? (self.lineWidth) : [_itemsWidth[_currentItemIndex] floatValue] - 4.0f;
         CGFloat lineH = _line.frame.size.height;
         
-        self.line.frame = CGRectMake(lineX + 2.0f, lineY, lineW, lineH);
+        if(self.lineWidth) {
+            self.line.frame = CGRectMake(lineX + [_itemsWidth[_currentItemIndex] floatValue] / 2 - lineW / 2, lineY, lineW, lineH);
+        } else {
+            self.line.frame = CGRectMake(lineX + 2.0f, lineY, lineW, lineH);
+        }
         
         self.ellipse.frame = CGRectMake(self.line.frame.origin.x, self.ellipse.frame.origin.y, self.line.frame.size.width, self.ellipse.frame.size.height);
         
         
     }];
+}
+
+- (void)setLineWidth:(CGFloat)lineWidth {
+    _lineWidth = lineWidth;
+    
+    CGPoint center = self.line.center;
+    self.line.frame = CGRectMake(self.line.frame.origin.x, self.line.frame.origin.y, lineWidth, self.line.frame.size.height);
+    self.line.center = center;
 }
 
 - (void)setNavgationTabBar_color:(UIColor *)navgationTabBar_color
@@ -289,6 +306,16 @@
     }
 }
 
+- (void)setNavTabBar_normalTitle_font:(UIFont *)navTabBar_normalTitle_font
+{
+    _navTabBar_normalTitle_font = navTabBar_normalTitle_font;
+    
+    
+    for (UIButton *btn in self.items) {
+        btn.titleLabel.font = navTabBar_normalTitle_font;
+    }
+}
+
 - (void)setType:(YPNavTabBarType)type
 {
     _type = type;
@@ -312,8 +339,37 @@
     _style = style;
 }
 
+- (void)setContentViewH:(CGFloat)contentViewH {
+    _contentViewH = contentViewH;
+    
+    CGRect frame = self.navgationTabBar.frame;
+    frame.size.height = contentViewH;
+    [self.navgationTabBar setFrame:frame];
+    
+    frame = self.line.frame;
+    frame.origin.y = contentViewH - 3;
+    [self.line setFrame:frame];
+    
+    frame = self.ellipse.frame;
+    frame.size.height = contentViewH - 16;
+    [self.ellipse setFrame:frame];
+    
+    for (UIButton *btn in self.items)
+    {
+        frame = btn.frame;
+        frame.size.height = contentViewH;
+        [btn setFrame:frame];
+    }
+}
 
-
+#pragma mark - Getter
+- (CGFloat)contentViewH {
+    if(0 <= _contentViewH) {
+        return 44;
+    } else {
+        return _contentViewH;
+    }
+}
 
 
 @end

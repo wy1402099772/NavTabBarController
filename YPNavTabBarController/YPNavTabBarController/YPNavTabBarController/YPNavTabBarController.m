@@ -20,8 +20,7 @@
 
 /** 选项标题数组 */
 @property (nonatomic, strong) NSMutableArray* titles;
-/** 选线条 */
-@property (nonatomic, weak) YPNavTabBar* navTabBar;
+
 /** 滚动主视图 */
 @property (nonatomic, weak) UIScrollView* mainView;
 
@@ -214,7 +213,7 @@
 
     self.navTabBar.yp_y = navTabBar_Y;
 
-    self.mainView.frame = CGRectMake(0, CGRectGetMaxY(self.navTabBar.frame), YPScreenW, YPScreenH - CGRectGetMaxY(self.navTabBar.frame));
+    self.mainView.frame = CGRectMake(0, CGRectGetMaxY(self.navTabBar.frame), _presetSize.width, _presetSize.height - CGRectGetMaxY(self.navTabBar.frame));
 }
 
 - (void)setContentViewH:(CGFloat)contentViewH
@@ -222,6 +221,8 @@
     _contentViewH = contentViewH;
 
     _mainView.yp_height = contentViewH;
+    
+    self.navTabBar.contentViewH = contentViewH;
 }
 
 - (void)setNavTabBar_color:(UIColor*)navTabBar_color
@@ -252,6 +253,11 @@
     self.navTabBar.navTabBar_selectedTitle_color = navTabBar_selectedTitle_color;
 }
 
+- (void)setNavTabBar_normalTitle_font:(UIFont *)navTabBar_normalTitle_font {
+    _navTabBar_normalTitle_font = navTabBar_normalTitle_font;
+    self.navTabBar.navTabBar_normalTitle_font = navTabBar_normalTitle_font;
+}
+
 - (void)setNavTabBar_type:(YPNavTabBarType)navTabBar_type
 {
     _navTabBar_type = navTabBar_type;
@@ -274,6 +280,18 @@
     _currentIndex = currentIndex;
 
     self.navTabBar.progress = currentIndex;
+}
+
+- (void)setLineWidth:(CGFloat)lineWidth {
+    self.navTabBar.lineWidth = lineWidth;
+}
+
+- (CGSize)presetSize {
+    if(_presetSize.height == 0 && _presetSize.width == 0) {
+        return [UIScreen mainScreen].bounds.size;
+    } else {
+        return _presetSize;
+    }
 }
 
 @end

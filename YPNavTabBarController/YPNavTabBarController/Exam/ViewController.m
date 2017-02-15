@@ -6,15 +6,10 @@
 //  Copyright (c) 2015年 MichaelPPP. All rights reserved.
 //
 
-#import "FiveViewController.h"
-#import "FourViewController.h"
-#import "OneViewController.h"
-#import "SixViewController.h"
-#import "ThreeViewController.h"
-#import "TwoViewController.h"
 #import "ViewController.h"
 #import "YPNavTabBarController.h"
 #import "YPNavTabBarControllerConst.h"
+#import "TestViewController.h"
 
 @interface ViewController ()
 
@@ -26,47 +21,45 @@
 {
     [super viewDidLoad];
 
-    OneViewController* oneVc = [[OneViewController alloc] init];
-    oneVc.title = @"要闻";
-    TwoViewController* twoVc = [[TwoViewController alloc] init];
-    twoVc.title = @"视频";
-    ThreeViewController* threeVc = [[ThreeViewController alloc] init];
-    threeVc.title = @"北京";
-    FourViewController* fourVc = [[FourViewController alloc] init];
-    fourVc.title = @"辽宁";
-    FiveViewController* fiveVc = [[FiveViewController alloc] init];
-    fiveVc.title = @"财经";
-    SixViewController* sixVc = [[SixViewController alloc] init];
-    sixVc.title = @"娱乐";
+    TestViewController* oneVc = [[TestViewController alloc] init];
+    oneVc.title = @"test0";
+    TestViewController* twoVc = [[TestViewController alloc] init];
+    twoVc.title = @"test01";
+    TestViewController* threeVc = [[TestViewController alloc] init];
+    threeVc.title = @"test10";
+    TestViewController* fourVc = [[TestViewController alloc] init];
+    fourVc.title = @"test11";
+    TestViewController* fiveVc = [[TestViewController alloc] init];
+    fiveVc.title = @"test100";
 
     
     YPNavTabBarController* navTabBarController = [[YPNavTabBarController alloc] initWithParentViewController:self];
-    navTabBarController.subViewControllers = @[ oneVc, twoVc, threeVc, fourVc, fiveVc, sixVc ];
+    navTabBarController.subViewControllers = @[ oneVc, twoVc, threeVc, fourVc, fiveVc];
+    
+    navTabBarController.presetSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    navTabBarController.contentViewH = 44; // 默认44
+    navTabBarController.navTabBar_Y = 20 + self.navigationController.toolbar.frame.size.height; // 默认为0
     
     navTabBarController.currentIndex = 2;
     
-    // 设置选项的位置(垂直方向)
-    navTabBarController.navTabBar_Y = 20; // 默认为0
 
-//    navTabBarController.navTabBar_type = YPNavTabBarTypeEllipse;
+    navTabBarController.navTabBar_type = YPNavTabBarTypeLine;
     
-}
+    navTabBarController.navTabBar_color = [UIColor redColor];
+    
+    navTabBarController.navTabBarLine_color = [UIColor greenColor];
 
-- (void)setup
-{
-    // 设置内容视图的高度
-    // navTabBarController.contentViewH = 100; // 默认填充
-    // 设置选项条的背景颜色
-    // navTabBarController.navTabBar_color = [UIColor redColor];
-    // 设置选项条的导航条颜色
-    // navTabBarController.navTabBarLine_color = [UIColor yellowColor];
-    // 设置未被选中时的标题字体颜色
-    // navTabBarController.navTabBar_normalTitle_color = [UIColor purpleColor];
-    // 设置选中时的标题字体颜色
-    // navTabBarController.navTabBar_selectedTitle_color = [UIColor orangeColor];
-    // navTabBarController.navTabBar_style = YPNavTabBarStyleCenter;
-    // 设置默认选中索引
-    //    navTabBarController.currentIndex = 4;
+    navTabBarController.navTabBar_color = [UIColor whiteColor];
+    
+    navTabBarController.navTabBarLine_color = [UIColor yellowColor];
+    
+    navTabBarController.navTabBar_normalTitle_color = [UIColor purpleColor];
+    
+    navTabBarController.navTabBar_selectedTitle_color = [UIColor orangeColor];
+    
+    navTabBarController.navTabBar_style = YPNavTabBarStyleCenter;
+    
+    navTabBarController.navTabBar_normalTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:16];
 }
 
 @end

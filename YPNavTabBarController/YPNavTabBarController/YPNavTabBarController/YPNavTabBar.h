@@ -13,8 +13,6 @@ typedef enum {
     YPNavTabBarTypeLine = 0,
     /** 椭圆风格 */
     YPNavTabBarTypeEllipse,
-    /** 箭头风格 */
-    YPNavTabBarTypeArrow
 } YPNavTabBarType;
 
 typedef enum {
@@ -66,11 +64,20 @@ typedef enum {
 /** 选项标题选中状态文字的颜色 */
 @property (nonatomic, strong) UIColor* navTabBar_selectedTitle_color;
 
+/** 选项标题普通状态文字的字体 */
+@property (nonatomic, strong) UIFont* navTabBar_normalTitle_font;
+
 /** 选项风格 */
 @property (nonatomic, assign) YPNavTabBarType type;
 
 /** 选项文字排列风格 */
 @property (nonatomic, assign) YPNavTabBarStyle style;
+
+/** 下划线的宽度 */
+@property (nonatomic, assign) CGFloat lineWidth;
+
+/** 内容视图的高度 */
+@property (nonatomic, assign) CGFloat contentViewH;
 
 /**
  *  刷新数据

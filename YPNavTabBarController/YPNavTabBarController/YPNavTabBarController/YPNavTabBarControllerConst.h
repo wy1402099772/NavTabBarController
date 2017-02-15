@@ -12,8 +12,8 @@
 
 #endif
 
-/** navgationbar's height */
-#define YPNavigationBarH 44.0f
+///** navgationbar's height */
+//#define YPNavigationBarH 44.0f
 /** statusbar's height */
 #define YPStatusBarH 20.0f
 /** navtabbar's height and statusbar's height */

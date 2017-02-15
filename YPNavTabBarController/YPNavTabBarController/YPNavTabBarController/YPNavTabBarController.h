@@ -14,6 +14,9 @@
 /** 子控制器 */
 @property (nonatomic, strong) NSArray* subViewControllers;
 
+/** 选线条 */
+@property (nonatomic, weak) YPNavTabBar* navTabBar;
+
 /** 选项条顶端距离父视图顶端的距离 */
 @property (nonatomic, assign) CGFloat navTabBar_Y;
 
@@ -38,8 +41,15 @@
 /** 选项标题选中状态文字的颜色 */
 @property (nonatomic, strong) UIColor* navTabBar_selectedTitle_color;
 
+/** 选项标题普通状态文字的字体 */
+@property (nonatomic, strong) UIFont* navTabBar_normalTitle_font;
+
 /** 索引(如果使用请在所有属性赋值之前调用) */
 @property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, assign) CGFloat lineWidth;
+
+@property (nonatomic, assign) CGSize presetSize;
 
 /** 构造方法 */
 - (instancetype)initWithParentViewController:(UIViewController*)parentViewController;
