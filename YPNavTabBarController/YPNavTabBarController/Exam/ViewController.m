@@ -38,11 +38,13 @@
     
     navTabBarController.presetSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     navTabBarController.contentViewH = 44; // 默认44
-    navTabBarController.navTabBar_Y = self.navigationController.toolbar.frame.size.height; // 默认为0
+    navTabBarController.navTabBar_Y = self.navigationController.toolbar.frame.size.height + 20; // 默认为0
     
-    navTabBarController.navTabBar_type = YPNavTabBarTypeEllipse;
+    navTabBarController.navTabBar_type = YPNavTabBarTypeLine;
     
-    navTabBarController.navTabBar_color = [UIColor redColor];
+    navTabBarController.lineWidth = 20;
+    
+    navTabBarController.navTabBar_color = [UIColor grayColor];
     
     navTabBarController.navTabBarLine_color = [UIColor yellowColor];
     

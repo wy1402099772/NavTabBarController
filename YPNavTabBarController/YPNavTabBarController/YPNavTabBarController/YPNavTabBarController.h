@@ -44,14 +44,16 @@
 /** 选项标题普通状态文字的字体 */
 @property (nonatomic, strong) UIFont* navTabBar_normalTitle_font;
 
-/** 选项标题普通状态文字的字体 */
+/** 选项标题普选中态文字的字体 */
 @property (nonatomic, strong) UIFont* navTabBar_selectedTitle_font;
 
 /** 索引(如果使用请在所有属性赋值之前调用) 注意  请在最后设置这个*/
 @property (nonatomic, assign) NSInteger currentIndex;
 
+/** 下标线的宽度 */
 @property (nonatomic, assign) CGFloat lineWidth;
 
+/** 如果不是全屏大小， 设置这个选项来控制整个VC的大小符合要求 */
 @property (nonatomic, assign) CGSize presetSize;
 
 /** 构造方法 */

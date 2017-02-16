@@ -18,6 +18,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithRed:(arc4random() % 10) /10.0 green:(arc4random() % 10) /10.0 blue:(arc4random() % 10) /10.0 alpha:1];
+    
+    self.view.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.view.layer.borderWidth = 1;
     // Do any additional setup after loading the view.
 }
 
