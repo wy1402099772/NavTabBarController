@@ -67,6 +67,9 @@ typedef enum {
 /** 选项标题普通状态文字的字体 */
 @property (nonatomic, strong) UIFont* navTabBar_normalTitle_font;
 
+/** 选项标题普通状态文字的字体 */
+@property (nonatomic, strong) UIFont* navTabBar_selectedTitle_font;
+
 /** 选项风格 */
 @property (nonatomic, assign) YPNavTabBarType type;
 

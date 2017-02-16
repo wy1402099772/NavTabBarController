@@ -44,7 +44,10 @@
 /** 选项标题普通状态文字的字体 */
 @property (nonatomic, strong) UIFont* navTabBar_normalTitle_font;
 
-/** 索引(如果使用请在所有属性赋值之前调用) */
+/** 选项标题普通状态文字的字体 */
+@property (nonatomic, strong) UIFont* navTabBar_selectedTitle_font;
+
+/** 索引(如果使用请在所有属性赋值之前调用) 注意  请在最后设置这个*/
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property (nonatomic, assign) CGFloat lineWidth;

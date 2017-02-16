@@ -31,38 +31,8 @@
 
 @implementation YPNavTabBarController
 
-#pragma mark - lazy
-
-- (UIScrollView*)mainView
-{
-    if (_mainView == nil) {
-        UIScrollView* mainView = [[UIScrollView alloc] init];
-        mainView.frame = CGRectMake(0, CGRectGetMaxY(self.navTabBar.frame), YPScreenW, YPScreenH - CGRectGetMaxY(self.navTabBar.frame));
-        mainView.pagingEnabled = YES;
-        mainView.bounces = NO;
-        mainView.showsHorizontalScrollIndicator = NO;
-        mainView.contentSize = CGSizeMake(YPScreenW * self.subViewControllers.count, 0);
-        mainView.delegate = self;
-        [self.view addSubview:mainView];
-        self.mainView = mainView;
-    }
-    return _mainView;
-}
-
-- (YPNavTabBar*)navTabBar
-{
-    if (_navTabBar == nil) {
-        YPNavTabBar* navTabBar = [[YPNavTabBar alloc] init];
-        navTabBar.frame = CGRectMake(0, 0, YPScreenW, 44);
-        navTabBar.delegate = self;
-        navTabBar.itemTitles = _titles;
-        // 更新选项条标题数据
-        [navTabBar updateData];
-        [self.view addSubview:navTabBar];
-        self.navTabBar = navTabBar;
-    }
-    return _navTabBar;
-}
+@synthesize navTabBar_normalTitle_font = _navTabBar_normalTitle_font;
+@synthesize navTabBar_selectedTitle_font = _navTabBar_selectedTitle_font;
 
 #pragma mark - 初始化
 
@@ -191,9 +161,13 @@
         UIButton* btn = navTabBar.items[i];
         if (i == index) {
             btn.selected = YES;
+            
+            btn.titleLabel.font = self.navTabBar_selectedTitle_font;
         }
         else {
             btn.selected = NO;
+            
+            btn.titleLabel.font = self.navTabBar_normalTitle_font;
         }
     }
 }
@@ -258,6 +232,16 @@
     self.navTabBar.navTabBar_normalTitle_font = navTabBar_normalTitle_font;
 }
 
+- (void)setNavTabBar_selectedTitle_font:(UIFont *)navTabBar_selectedTitle_font {
+    _navTabBar_selectedTitle_font = navTabBar_selectedTitle_font;
+    self.navTabBar.navTabBar_selectedTitle_font = navTabBar_selectedTitle_font;
+    
+    if(self.currentIndex < self.navTabBar.items.count) {
+        UIButton *btn = self.navTabBar.items[self.currentIndex];
+        btn.titleLabel.font = self.navTabBar_selectedTitle_font;
+    }
+}
+
 - (void)setNavTabBar_type:(YPNavTabBarType)navTabBar_type
 {
     _navTabBar_type = navTabBar_type;
@@ -291,6 +275,56 @@
         return [UIScreen mainScreen].bounds.size;
     } else {
         return _presetSize;
+    }
+}
+
+
+#pragma mark - Getter
+- (UIScrollView*)mainView
+{
+    if (_mainView == nil) {
+        UIScrollView* mainView = [[UIScrollView alloc] init];
+        mainView.frame = CGRectMake(0, CGRectGetMaxY(self.navTabBar.frame), YPScreenW, YPScreenH - CGRectGetMaxY(self.navTabBar.frame));
+        mainView.pagingEnabled = YES;
+        mainView.bounces = NO;
+        mainView.showsHorizontalScrollIndicator = NO;
+        mainView.contentSize = CGSizeMake(YPScreenW * self.subViewControllers.count, 0);
+        mainView.delegate = self;
+        [self.view addSubview:mainView];
+        self.mainView = mainView;
+    }
+    return _mainView;
+}
+
+- (YPNavTabBar*)navTabBar
+{
+    if (_navTabBar == nil) {
+        YPNavTabBar* navTabBar = [[YPNavTabBar alloc] init];
+        navTabBar.frame = CGRectMake(0, 0, YPScreenW, 44);
+        navTabBar.delegate = self;
+        navTabBar.itemTitles = _titles;
+        // 更新选项条标题数据
+        [navTabBar updateData];
+        [self.view addSubview:navTabBar];
+        self.navTabBar = navTabBar;
+    }
+    return _navTabBar;
+}
+
+
+- (UIFont *)navTabBar_selectedTitle_font {
+    if(!_navTabBar_selectedTitle_font) {
+        return [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    } else {
+        return _navTabBar_selectedTitle_font;
+    }
+}
+
+- (UIFont *)navTabBar_normalTitle_font {
+    if(!_navTabBar_normalTitle_font) {
+        return [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    } else {
+        return _navTabBar_normalTitle_font;
     }
 }
 

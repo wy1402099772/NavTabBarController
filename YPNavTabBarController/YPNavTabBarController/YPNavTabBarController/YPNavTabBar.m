@@ -30,6 +30,10 @@
 @implementation YPNavTabBar
 
 @synthesize contentViewH = _contentViewH;
+@synthesize navTabBar_normalTitle_color = _navTabBar_normalTitle_color;
+@synthesize navTabBar_selectedTitle_color = _navTabBar_selectedTitle_color;
+@synthesize navTabBar_normalTitle_font = _navTabBar_normalTitle_font;
+@synthesize navTabBar_selectedTitle_font = _navTabBar_selectedTitle_font;
 
 #pragma mark - lazy -
 
@@ -160,8 +164,8 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(buttonX, 0, [widths[index] floatValue], self.contentViewH);
         [button setTitle:_itemTitles[index] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+        [button setTitleColor:self.navTabBar_normalTitle_color forState:UIControlStateNormal];
+        [button setTitleColor:self.navTabBar_selectedTitle_color forState:UIControlStateSelected];
         [button addTarget:self action:@selector(itemPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
@@ -240,8 +244,6 @@
     
     CGFloat flag = YPScreenW;
     
-    NSLog(@"%f, %f, %f", button.frame.origin.x, button.frame.size.width , flag);
-    NSLog(@"%f, %f, %d", button.frame.origin.x + button.frame.size.width, flag, button.frame.origin.x + button.frame.size.width > flag);
     if (button.frame.origin.x + button.frame.size.width > flag)
     {
         CGFloat offsetX = button.frame.origin.x + button.frame.size.width - flag;
@@ -338,11 +340,25 @@
     _navTabBar_normalTitle_font = navTabBar_normalTitle_font;
     
     
-    for (UIButton *btn in self.items) {
-        btn.titleLabel.font = navTabBar_normalTitle_font;
+    for (NSInteger i = 0; i < self.items.count; i++) {
+        UIButton *btn = self.items[i];
+        if(i != self.currentItemIndex) {
+            btn.titleLabel.font = navTabBar_normalTitle_font;
+        } else {
+            btn.titleLabel.font = self.navTabBar_selectedTitle_font;
+        }
     }
     
     [self updateData];
+}
+
+- (void)setNavTabBar_selectedTitle_font:(UIFont *)navTabBar_selectedTitle_font {
+//    _navTabBar_selectedTitle_font = navTabBar_selectedTitle_font;
+//    
+//    if(self.currentItemIndex < self.items.count) {
+//        UIButton *btn = self.items[self.currentItemIndex];
+//        btn.titleLabel.font = navTabBar_selectedTitle_font
+//    }
 }
 
 - (void)setType:(YPNavTabBarType)type
@@ -397,6 +413,22 @@
         return 44;
     } else {
         return _contentViewH;
+    }
+}
+
+- (UIColor *)navTabBar_normalTitle_color {
+    if(!_navTabBar_normalTitle_color) {
+        return [UIColor blackColor];
+    } else {
+        return _navTabBar_normalTitle_color;
+    }
+}
+
+- (UIColor *)navTabBar_selectedTitle_color {
+    if(!_navTabBar_selectedTitle_color) {
+        return [UIColor blueColor];
+    } else {
+        return _navTabBar_selectedTitle_color;
     }
 }
 

@@ -40,16 +40,9 @@
     navTabBarController.contentViewH = 44; // 默认44
     navTabBarController.navTabBar_Y = self.navigationController.toolbar.frame.size.height; // 默认为0
     
-    navTabBarController.currentIndex = 1;
-    
-
-    navTabBarController.navTabBar_type = YPNavTabBarTypeLine;
+    navTabBarController.navTabBar_type = YPNavTabBarTypeEllipse;
     
     navTabBarController.navTabBar_color = [UIColor redColor];
-    
-    navTabBarController.navTabBarLine_color = [UIColor greenColor];
-
-    navTabBarController.navTabBar_color = [UIColor whiteColor];
     
     navTabBarController.navTabBarLine_color = [UIColor yellowColor];
     
@@ -59,7 +52,11 @@
     
     navTabBarController.navTabBar_style = YPNavTabBarStyleCenter;
     
-    navTabBarController.navTabBar_normalTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:40];
+    navTabBarController.navTabBar_normalTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:20];
+    
+    navTabBarController.navTabBar_selectedTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:23];
+    
+    navTabBarController.currentIndex = 1;
 }
 
 @end
