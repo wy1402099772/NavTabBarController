@@ -8,6 +8,7 @@
 
 #import "YPNavTabBar.h"
 #import "YPNavTabBarControllerConst.h"
+#import "UIButton+PartHighLight.h"
 
 @interface YPNavTabBar()
 
@@ -291,6 +292,18 @@
         self.ellipse.frame = CGRectMake(self.line.frame.origin.x, self.ellipse.frame.origin.y, self.line.frame.size.width, self.ellipse.frame.size.height);
         
         
+    }];
+    
+    [self.items enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if(-1 < idx - progress && idx - progress < 0) {
+            [obj displayTextColors:@[self.navTabBar_normalTitle_color, self.navTabBar_selectedTitle_color] turnPoints:@[@0, @(progress - idx)]];
+        } else if(1 > idx - progress && idx - progress > 0) {
+            [obj displayTextColors:@[self.navTabBar_selectedTitle_color, self.navTabBar_normalTitle_color] turnPoints:@[@(progress - idx + 1), @1]];
+        } else if(idx == progress) {
+            [obj displayTextColors:@[self.navTabBar_selectedTitle_color, self.navTabBar_selectedTitle_color] turnPoints:@[@0, @1]];
+        } else {
+            [obj displayTextColors:@[self.navTabBar_normalTitle_color, self.navTabBar_normalTitle_color] turnPoints:@[@0, @1]];
+        }
     }];
 }
 

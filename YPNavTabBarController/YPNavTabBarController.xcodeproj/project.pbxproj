@@ -18,6 +18,7 @@
 		4E53594A1BB3CAA10030679A /* YPNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5359491BB3CAA10030679A /* YPNavTabBarController.m */; };
 		4E53594D1BB3CE0B0030679A /* YPNavTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53594C1BB3CE0B0030679A /* YPNavTabBar.m */; };
 		4E6CC7321BB3F11100FB2B8C /* UIView+YPNavTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CC7311BB3F11100FB2B8C /* UIView+YPNavTabBar.m */; };
+		937A50551E5C3BE400FC6126 /* UIButton+PartHighLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 937A50541E5C3BE400FC6126 /* UIButton+PartHighLight.m */; };
 		93FDCEAA1E5409DA0066D9ED /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FDCEA91E5409DA0066D9ED /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		4E53594C1BB3CE0B0030679A /* YPNavTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPNavTabBar.m; sourceTree = "<group>"; };
 		4E6CC7301BB3F11100FB2B8C /* UIView+YPNavTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YPNavTabBar.h"; sourceTree = "<group>"; };
 		4E6CC7311BB3F11100FB2B8C /* UIView+YPNavTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YPNavTabBar.m"; sourceTree = "<group>"; };
+		937A50531E5C3BE400FC6126 /* UIButton+PartHighLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PartHighLight.h"; sourceTree = "<group>"; };
+		937A50541E5C3BE400FC6126 /* UIButton+PartHighLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PartHighLight.m"; sourceTree = "<group>"; };
 		93FDCEA81E5409DA0066D9ED /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		93FDCEA91E5409DA0066D9ED /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +151,8 @@
 		4E5359411BB3C8170030679A /* YPNavTabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				937A50531E5C3BE400FC6126 /* UIButton+PartHighLight.h */,
+				937A50541E5C3BE400FC6126 /* UIButton+PartHighLight.m */,
 				4E5359451BB3CA550030679A /* YPNavTabBarControllerConst.h */,
 				4E5359461BB3CA550030679A /* YPNavTabBarControllerConst.m */,
 				4E5359481BB3CAA10030679A /* YPNavTabBarController.h */,
@@ -266,6 +271,7 @@
 				4E53594A1BB3CAA10030679A /* YPNavTabBarController.m in Sources */,
 				4E5359401BB3C7FA0030679A /* ViewController.m in Sources */,
 				4E53594D1BB3CE0B0030679A /* YPNavTabBar.m in Sources */,
+				937A50551E5C3BE400FC6126 /* UIButton+PartHighLight.m in Sources */,
 				4E53593F1BB3C7FA0030679A /* main.m in Sources */,
 				4E53593E1BB3C7FA0030679A /* AppDelegate.m in Sources */,
 				93FDCEAA1E5409DA0066D9ED /* TestViewController.m in Sources */,
