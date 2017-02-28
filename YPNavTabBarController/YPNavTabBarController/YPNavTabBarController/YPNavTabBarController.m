@@ -163,6 +163,9 @@
             btn.selected = YES;
             
             btn.titleLabel.font = self.navTabBar_selectedTitle_font;
+            
+            UIView *redDotView = navTabBar.redDotItems[index % navTabBar.redDotItems.count];
+            redDotView.hidden = YES;
         }
         else {
             btn.selected = NO;
@@ -276,6 +279,18 @@
     } else {
         return _presetSize;
     }
+}
+
+- (void)setRedDotColor:(UIColor *)redDotColor {
+    self.navTabBar.redDotColor = redDotColor;
+}
+
+- (void)markRedDotAtIndex:(NSUInteger)index autoDisappear:(BOOL)isAutoDisappear {
+    [self.navTabBar markRedDotAtIndex:index autoDisappear:isAutoDisappear];
+}
+
+- (void)removeRedDotAtIndex:(NSUInteger)index {
+    [self.navTabBar removeRedDotAtIndex:index];
 }
 
 

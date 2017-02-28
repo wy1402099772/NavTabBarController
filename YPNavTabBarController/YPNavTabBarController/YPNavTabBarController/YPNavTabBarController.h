@@ -56,6 +56,16 @@
 /** 如果不是全屏大小， 设置这个选项来控制整个VC的大小符合要求 */
 @property (nonatomic, assign) CGSize presetSize;
 
+
+/** 右上角红点的颜色 **/
+@property (nonatomic, strong) UIColor *redDotColor;
+
+/** 设置小红点， 是否在点击后自动消失(但是目前不支持常驻的小红花点， 所以isAutoDisappear目前并没有生效， 默认该界面出现了就直接消掉) **/
+- (void)markRedDotAtIndex:(NSUInteger)index autoDisappear:(BOOL)isAutoDisappear;
+
+/** 移除小红点 (但是目前不支持常驻的小红花点， 所以isAutoDisappear目前并没有生效， 默认该界面出现了就直接消掉) **/
+- (void)removeRedDotAtIndex:(NSUInteger)index;
+
 /** 构造方法 */
 - (instancetype)initWithParentViewController:(UIViewController*)parentViewController;
 

@@ -35,6 +35,7 @@
 @synthesize navTabBar_selectedTitle_color = _navTabBar_selectedTitle_color;
 @synthesize navTabBar_normalTitle_font = _navTabBar_normalTitle_font;
 @synthesize navTabBar_selectedTitle_font = _navTabBar_selectedTitle_font;
+@synthesize redDotColor = _redDotColor;
 
 #pragma mark - lazy -
 
@@ -85,6 +86,13 @@
     return _items;
 }
 
+- (NSMutableArray<UIView *> *)redDotItems {
+    if(_redDotItems == nil) {
+        _redDotItems = [NSMutableArray array];
+    }
+    return _redDotItems;
+}
+
 #pragma mark - Life Cycle -
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -115,6 +123,14 @@
         CGFloat contentWidth = [self contentWidthAndAddNavTabBarItemsWithButtonsWidth:[self getButtonsWidthWithTitles:self.itemTitles]];
         self.navgationTabBar.contentSize = CGSizeMake(contentWidth, 0);
     }
+}
+
+- (void)markRedDotAtIndex:(NSUInteger)index autoDisappear:(BOOL)isAutoDisappear {
+    self.redDotItems[index % self.redDotItems.count].hidden = NO;
+}
+
+- (void)removeRedDotAtIndex:(NSUInteger)index {
+    self.redDotItems[index % self.redDotItems.count].hidden = YES;
 }
 
 #pragma mark - 私有方法 -
@@ -180,6 +196,23 @@
         [self.items addObject:button];
         
         buttonX += [widths[index] floatValue];
+    }
+    
+    for (UIView *tmp in self.redDotItems) {
+        [tmp removeFromSuperview];
+    }
+    [self.redDotItems removeAllObjects];
+    for(NSUInteger i = 0; i < self.items.count; i++) {
+        UIView *redDotViewItem = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
+        redDotViewItem.backgroundColor = self.redDotColor;
+        redDotViewItem.layer.cornerRadius = 4;
+        redDotViewItem.layer.masksToBounds = YES;
+        redDotViewItem.hidden = YES;
+        
+        UIButton *btn = self.items[i % self.items.count];
+        [btn addSubview:redDotViewItem];
+        [self.redDotItems addObject:redDotViewItem];
+        redDotViewItem.center = CGPointMake(btn.frame.size.width - 14, 12);
     }
     
     [self showLineWithButtonWidth:[widths[0] floatValue]];
@@ -420,6 +453,13 @@
     }
 }
 
+- (void)setRedDotColor:(UIColor *)redDotColor {
+    _redDotColor = redDotColor;
+    for (UIView *tmp in self.redDotItems) {
+        tmp.backgroundColor = redDotColor;
+    }
+}
+
 #pragma mark - Getter
 - (CGFloat)contentViewH {
     if(0 <= _contentViewH) {
@@ -442,6 +482,14 @@
         return [UIColor blueColor];
     } else {
         return _navTabBar_selectedTitle_color;
+    }
+}
+
+- (UIColor *)redDotColor {
+    if(!_redDotColor) {
+        return [UIColor redColor];
+    } else {
+        return _redDotColor;
     }
 }
 

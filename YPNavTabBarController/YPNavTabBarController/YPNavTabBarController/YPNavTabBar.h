@@ -82,6 +82,18 @@ typedef enum {
 /** 内容视图的高度 */
 @property (nonatomic, assign) CGFloat contentViewH;
 
+/** 右上角红点的颜色 **/
+@property (nonatomic, strong) NSMutableArray<UIView *> *redDotItems;
+
+/** 右上角红点的颜色 **/
+@property (nonatomic, strong) UIColor *redDotColor;
+
+/** 设置小红点， 是否在点击后自动消失(但是目前不支持常驻的小红花点， 所以isAutoDisappear目前并没有生效， 默认该界面出现了就直接消掉) **/
+- (void)markRedDotAtIndex:(NSUInteger)index autoDisappear:(BOOL)isAutoDisappear;
+
+/** 移除小红点 (但是目前不支持常驻的小红花点， 所以isAutoDisappear目前并没有生效， 默认该界面出现了就直接消掉) **/
+- (void)removeRedDotAtIndex:(NSUInteger)index;
+
 /**
  *  刷新数据
  */

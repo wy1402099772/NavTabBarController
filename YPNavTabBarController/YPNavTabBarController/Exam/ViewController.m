@@ -59,6 +59,12 @@
     navTabBarController.navTabBar_selectedTitle_font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:23];
     
     navTabBarController.currentIndex = 1;
+    
+    navTabBarController.redDotColor = [UIColor colorWithRed:0.3 green:0.2 blue:0.1 alpha:1];
+    
+    for(NSUInteger i = 0; i < navTabBarController.subViewControllers.count; i++) {
+        [navTabBarController markRedDotAtIndex:i autoDisappear:YES];
+    }
 }
 
 @end
