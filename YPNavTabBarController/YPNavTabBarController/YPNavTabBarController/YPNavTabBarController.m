@@ -21,11 +21,10 @@
 /** 选项标题数组 */
 @property (nonatomic, strong) NSMutableArray* titles;
 
-/** 滚动主视图 */
-@property (nonatomic, weak) UIScrollView* mainView;
-
 /** 开始拖动时的偏移量 */
 @property (nonatomic, assign) CGFloat startContentOffsetX;
+
+@property (nonatomic, assign) NSInteger realIndex;
 
 @end
 
@@ -33,6 +32,7 @@
 
 @synthesize navTabBar_normalTitle_font = _navTabBar_normalTitle_font;
 @synthesize navTabBar_selectedTitle_font = _navTabBar_selectedTitle_font;
+@synthesize currentIndex = _currentIndex;
 
 #pragma mark - 初始化
 
@@ -147,7 +147,14 @@
 
 - (void)itemDidSelectedWithIndex:(YPNavTabBar*)navTabBar index:(NSInteger)index
 {
-    
+    if(self.realIndex != index) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(self.delegate && [self.delegate respondsToSelector:@selector(ypNavTabBar:DidScrollToIndex:)]) {
+                [self.delegate ypNavTabBar:self DidScrollToIndex:index];
+            }
+        });
+    }
+    self.realIndex = index;
     
     UIViewController* selectedVc = (UIViewController*)self.subViewControllers[index];
     selectedVc.view.frame = CGRectMake(YPScreenW * index, 0, YPScreenW, self.mainView.frame.size.height);
@@ -239,8 +246,8 @@
     _navTabBar_selectedTitle_font = navTabBar_selectedTitle_font;
     self.navTabBar.navTabBar_selectedTitle_font = navTabBar_selectedTitle_font;
     
-    if(self.currentIndex < self.navTabBar.items.count) {
-        UIButton *btn = self.navTabBar.items[self.currentIndex];
+    if(_currentIndex < self.navTabBar.items.count) {
+        UIButton *btn = self.navTabBar.items[_currentIndex];
         btn.titleLabel.font = self.navTabBar_selectedTitle_font;
     }
 }
@@ -341,6 +348,10 @@
     } else {
         return _navTabBar_normalTitle_font;
     }
+}
+
+- (NSInteger)currentIndex {
+    return self.realIndex;
 }
 
 @end

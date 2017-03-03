@@ -11,7 +11,7 @@
 #import "YPNavTabBarControllerConst.h"
 #import "TestViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <YPNavTabBarControllerDelegate>
 
 @end
 
@@ -62,9 +62,16 @@
     
     navTabBarController.redDotColor = [UIColor colorWithRed:0.3 green:0.2 blue:0.1 alpha:1];
     
+    navTabBarController.delegate = self;
+    
     for(NSUInteger i = 0; i < navTabBarController.subViewControllers.count; i++) {
         [navTabBarController markRedDotAtIndex:i autoDisappear:YES];
     }
+}
+
+#pragma mark - YPNavTabBarControllerDelegate
+- (void)ypNavTabBar:(YPNavTabBarController *)control DidScrollToIndex:(NSUInteger)index {
+    NSLog(@"Has Reach index : %ld", (long)index);
 }
 
 @end

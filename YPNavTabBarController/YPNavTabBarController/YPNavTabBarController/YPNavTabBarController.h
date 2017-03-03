@@ -9,7 +9,12 @@
 #import "YPNavTabBar.h"
 #import <UIKit/UIKit.h>
 
+@protocol YPNavTabBarControllerDelegate;
+
 @interface YPNavTabBarController : UIViewController
+
+/** 滚动主视图 */
+@property (nonatomic, weak) UIScrollView* mainView;
 
 /** 子控制器 */
 @property (nonatomic, strong) NSArray* subViewControllers;
@@ -60,6 +65,8 @@
 /** 右上角红点的颜色 **/
 @property (nonatomic, strong) UIColor *redDotColor;
 
+@property (nonatomic, weak) id<YPNavTabBarControllerDelegate> delegate;
+
 /** 设置小红点， 是否在点击后自动消失(但是目前不支持常驻的小红花点， 所以isAutoDisappear目前并没有生效， 默认该界面出现了就直接消掉) **/
 - (void)markRedDotAtIndex:(NSUInteger)index autoDisappear:(BOOL)isAutoDisappear;
 
@@ -80,6 +87,12 @@
 
 @end
 
+
+@protocol YPNavTabBarControllerDelegate <NSObject>
+
+- (void)ypNavTabBar:(YPNavTabBarController *)control DidScrollToIndex:(NSUInteger)index;
+
+@end
 
 
 
