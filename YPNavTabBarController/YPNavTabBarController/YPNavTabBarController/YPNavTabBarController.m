@@ -50,6 +50,7 @@
         parentViewController.automaticallyAdjustsScrollViewInsets = NO;
         [parentViewController addChildViewController:self];
         [parentViewController.view addSubview:self.view];
+        self.view.frame = [UIScreen mainScreen].bounds;
     }
     return self;
 }
