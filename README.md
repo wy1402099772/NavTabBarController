@@ -1,4 +1,7 @@
 # YPNavTabBarController
+
+# modified from [YPNavTabBarController](https://github.com/MichaelHuyp/YPNavTabBarController)
+
 ##这是一款自定义滑块分段选择控制器
 * An easy way to use Segment selection controller
 * 用法简单的滑块分段选择控制器:两行代码就可集成
